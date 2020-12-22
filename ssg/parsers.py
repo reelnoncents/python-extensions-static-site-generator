@@ -14,7 +14,7 @@ from ssg import hooks
 class Parser:
     base_ext = ".html"
     file_exts: List[str] = []
-
+ 
     def valid_file_ext(self, file_ext):
         return file_ext in self.file_exts
 
@@ -52,6 +52,7 @@ class MarkdownParser(Parser):
         sys.stdout.write(
             "\x1b[1;32m{} converted to HTML. Metadata: {}\n".format(path.name, content)
         )
+        hooks.event("written")
 
 
 class ReStructuredTextParser(Parser):
@@ -65,3 +66,4 @@ class ReStructuredTextParser(Parser):
         sys.stdout.write(
             "\x1b[1;32m{} converted to HTML. Metadata: {}\n".format(path.name, content)
         )
+        hooks.event("written")
